@@ -1,8 +1,8 @@
-$(document).ready(function() {
+$(document).ready(function () {
 	$('#btnDelete').click(deleteTown)
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
 	$('#btnAdd').click(addTown);
 });
 
@@ -10,16 +10,26 @@ function deleteTown() {
 	let townName = $('#townName').val();
 	$('#townName').val('');
 	let removed = false;
+
 	for (let option of $('#towns option')) {
 		if (option.textContent == townName) {
 			removed = true;
 			option.remove();
 		}
 	}
+
 	if (removed)
-		$('#result').text(townName + " deleted.");
+		showMessage(townName + " deleted.");
 	else
-		$('#result').text(townName + " not found.");
+		showMessage(townName + " not found.");
+}
+
+function showMessage(msg) {
+	$('#result').text(msg).css("display", "block");
+
+	setTimeout(function () {
+		$('#result').hide('blind', {}, 500);
+	}, 3000);
 }
 
 function addTown() {
